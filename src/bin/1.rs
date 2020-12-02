@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::{collections::HashSet, path::Path};
 use std::io::BufRead;
 use std::{fs::File, io};
 
@@ -19,17 +19,19 @@ fn main() {
     };
     
     let mut count  = 0;
+    
+    let mut visited = HashSet::new();
  
-    for x in &input {
-        for y in &input {
-            
-            count += 1;
-            
-            if x + y == 2020 {
-                println!("{} * {} = {}", x, y, x * y);
-            }
+    for x in input {
+        
+        if visited.contains(&(2020 - x)){
+            println!("{} * {} = {}", x, 2020 - x, x * (2020 - x));
+
         }
         
+        visited.insert(x);
+        
+        count += 1;
     }
     
     println!("{}", count);
